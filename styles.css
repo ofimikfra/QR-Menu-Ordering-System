@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    width: 50%;
+    margin: auto;
+}
+
+header {
+    text-align: center;
+    margin: 0; 
+    background-color: #333;
+    box-sizing: border-box;
+    position: relative; /* Ensure proper stacking context */
+}
+
+header h1 {
+    margin: 0;
+    padding: 10px 0; 
+    color: white;
+}
+
+main {
+    height: 100vh;
+    background-color: thistle;
+    margin: 0; 
+    box-sizing: border-box;
+    position: relative; /* Align with header */
+    top: -1px; /* Overlap by 1px to remove any visible gap */
+    padding: 10px;
+}
+
+main h2 {
+    margin: 0; 
+    padding: 15px 0; 
+}
+
+nav {
+    padding: 10px 0px;
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.item {
+    display: flex;
+    height: 150px;
+    width: fit-content;
+    margin-bottom: 10px;
+    background-color: #f4f4f480;
+    border-radius: 15px;
+}
+
+.itemdesc {
+    margin: 0 15px; /* Adjusted margin for consistent spacing */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0px; /* Added gap to control spacing between child elements */
+}
+
+.itemdesc p {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.itemdesc h3 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.itemdesc span {
+    color: #0000009d;
+}
+
+.item img {
+    height: 100%;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    position: relative;
+    padding: 10px 0;
+    width: 100%;
+    bottom: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    padding: 10px 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.active {
+    background-color: thistle;
+}
