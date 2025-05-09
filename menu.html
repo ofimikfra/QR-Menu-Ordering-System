@@ -9,21 +9,33 @@
     <link rel="script" href="script.js">
 </head>
 <body>
+
+    <button type="button" class="basket">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#f4f4f4" class="bi bi-basket2-fill" viewBox="0 0 16 16">
+            <path d="M5.929 1.757a.5.5 0 1 0-.858-.514L2.217 6H.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h.623l1.844 6.456A.75.75 0 0 0 3.69 15h8.622a.75.75 0 0 0 .722-.544L14.877 8h.623a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1.717L10.93 1.243a.5.5 0 1 0-.858.514L12.617 6H3.383zM4 10a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm3 0a1 1 0 0 1 2 0v2a1 1 0 1 1-2 0zm4-1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1"/>
+        </svg>
+        <div class="basketcount">
+            <span>0</span>
+        </div>
+    </button>
+
+
     <header>
         <h1>Menu</h1>
         <nav>
-            <a class="active" href="menu.html">All items</a>
-            <a href="menu.html">Category 1</a>
-            <a href="menu.html">Category 2</a>
+            <a class="active" href="#allitems">All items</a>
+            <a href="#cat1">Category 1</a>
+            <a href="#cat2">Category 2</a>
+            <a href="#cat3">Category 3</a>
         </nav>
     </header>
 
     <main>
-        <h2>All Items</h2>
+        <h2 id="allitems">All Items</h2>
 
         <section class="item">
             <div class="itemimg">
-                <img src="https://i.pinimg.com/736x/4c/47/e5/4c47e542d4ab90720a4528e5d2dae14e.jpg" alt="Item Name">
+                <img src="https://i.pinimg.com/736x/27/78/0f/27780fc651dff0eb419b06ecf93a3055.jpg" alt="Item Name">
             </div>
             <div class="itemdesc">
                 <h3>Iced latte</h3>
@@ -32,9 +44,11 @@
             </div>
         </section>
 
+        <h2 id="cat1">Category 1</h2>
+
         <section class="item">
             <div class="itemimg">
-                <img src="https://i.pinimg.com/736x/4c/47/e5/4c47e542d4ab90720a4528e5d2dae14e.jpg" alt="Item Name">
+                <img src="https://i.pinimg.com/736x/ea/cd/be/eacdbe5bb407aba10613c49f6845eb56.jpg" alt="Item Name">
             </div>
             <div class="itemdesc">
                 <h3>Iced latte</h3>

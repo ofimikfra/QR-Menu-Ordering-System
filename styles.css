@@ -1,35 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: white;
+    font-family: "Noto Sans", sans-serif;
     font-size: 18px;
     margin: 0;
     padding: 0;
     width: 50%;
     margin: auto;
+    color: whitesmoke;
+}
+
+p {
+    line-height: 1.2;
 }
 
 header {
     text-align: center;
     margin: 0; 
-    background-color: #333;
+    background-color: #352b24;
     box-sizing: border-box;
-    position: relative; /* Ensure proper stacking context */
+    position: relative;
+    padding-top: 15px;
 }
 
 header h1 {
     margin: 0;
     padding: 10px 0; 
-    color: white;
 }
 
 main {
     height: 100vh;
-    background-color: thistle;
+    background-color: #836855;
     margin: 0; 
     box-sizing: border-box;
-    position: relative; /* Align with header */
-    top: -1px; /* Overlap by 1px to remove any visible gap */
-    padding: 10px;
+    position: relative; 
+    top: -1px; 
+    padding: 12px;
+    padding-top: 0px;
 }
 
 main h2 {
@@ -43,6 +50,8 @@ nav {
     overflow-x: scroll;
     white-space: nowrap;
     box-sizing: border-box;
+    text-align: left;
+    color: white;
 }
 
 .item {
@@ -52,20 +61,21 @@ nav {
     margin-bottom: 10px;
     background-color: #f4f4f480;
     border-radius: 15px;
+    color: black;
 }
 
 .itemdesc {
-    margin: 0 15px; /* Adjusted margin for consistent spacing */
+    margin: 0 15px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0px; /* Added gap to control spacing between child elements */
+    gap: 0px; 
 }
 
 .itemdesc p {
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin-bottom: 5px;
@@ -82,14 +92,15 @@ nav {
 }
 
 .item img {
-    height: 100%;
+    height: 150px;
+    width: 150px;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
 }
 
 footer {
-    background-color: #333;
-    color: white;
+    background-color: #352b24;
+    color: seashell;
     text-align: center;
     position: relative;
     padding: 10px 0;
@@ -98,17 +109,53 @@ footer {
 }
 
 a {
-    color: black;
+    color: seashell;
     text-decoration: none;
     padding: 10px 10px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    transition: background-color 0.3s ease;
+    
 }
 
 a:hover {
-    text-decoration: underline;
+    background-color: #83685577;
+    transition: background-color 0.3s ease;
 }
 
 a.active {
-    background-color: thistle;
+    background-color: #836855;
+}
+
+.basket {
+    background: #352b24;
+    border-radius: 100%;
+    border: none;
+    padding: 15px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+}
+
+.basketcount {
+    background-color: seashell;
+    padding: 5px;
+    border-radius: 100%;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.basketcount span {
+    font-size: 12px;
+    color: black;
 }
