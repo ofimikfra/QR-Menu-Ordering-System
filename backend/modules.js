@@ -1,6 +1,5 @@
 const { MongoClient } = require('mongodb');
 const express = require('express');
-const url = '';
 const client = new MongoClient(url);
 
 let db;
