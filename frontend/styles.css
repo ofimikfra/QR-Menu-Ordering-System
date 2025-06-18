@@ -5,9 +5,9 @@ body {
     font-size: 18px;
     margin: 0;
     padding: 0;
-    width: 50%;
     margin: auto;
     color: whitesmoke;
+    background-color: #352924;
 }
 
 p {
@@ -17,7 +17,7 @@ p {
 header {
     text-align: center;
     margin: 0; 
-    background-color: #352b24;
+    background-color: #352924;
     box-sizing: border-box;
     position: relative;
     padding-top: 15px;
@@ -30,7 +30,7 @@ header h1 {
 
 main {
     height: 100vh;
-    background-color: #836855;
+    background-color: #cfb39e;
     margin: 0; 
     box-sizing: border-box;
     position: relative; 
@@ -124,7 +124,7 @@ a:hover {
 }
 
 a.active {
-    background-color: #836855;
+    background-color: #cfb39e;
 }
 
 .basket {
