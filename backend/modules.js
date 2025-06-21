@@ -24,31 +24,39 @@ function initializeTables() {
   const staffTable = `
     create table if not exists users (
       id int auto_increment primary key,
-      
+      username varchar(255) not null unique,
+      password varchar(255) not null,
       role enum("admin", "staff") not null default "staff",
+
     );
   `;
 
   const ordersTable = `
     create table if not exists orders (
       id int auto_increment primary key,
-      username varchar(255) not null unique,
-      password 
+      notes varchar(255),
+      tableNo int not null,
+      order_time timestamp default current_timestamp
     );
   `;
 
   const itemsTable = `
-    create table if not exists menu (
+    create table if not exists items (
       id int auto_increment primary key,
-      varchar
-
+      description varchar(255),
+      imageURL varchar(255),
+      price decimal(10,2) not null,
       availability enum("available", "unavailable") not null default "available"
     );
   `
 
   const orderItemsTable = `
     create table if not exists orderItems (
-      itemID
+      id int auto_increment primary key,
+      itemID int not null,
+      orderID int not null,
+      foreign key itemID references items(id) on delete cascade,
+      foreign key orderID references orders(id) on delete restrict
     );
   `
 
