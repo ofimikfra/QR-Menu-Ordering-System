@@ -25,9 +25,10 @@ function initializeTables() {
     create table if not exists users (
       id int auto_increment primary key,
       username varchar(255) not null unique,
+      fname varchar(255) not null,
+      lname varchar(255) not null,
       password varchar(255) not null,
-      role enum("admin", "staff") not null default "staff",
-
+      role enum("admin", "staff") not null default "staff"
     );
   `;
 
@@ -40,50 +41,62 @@ function initializeTables() {
     );
   `;
 
-  const itemsTable = `
-    create table if not exists items (
+  const productsTable = `
+    create table if not exists products (
       id int auto_increment primary key,
+      name varchar(255) not null,
       description varchar(255),
       imageURL varchar(255),
       price decimal(10,2) not null,
-      availability enum("available", "unavailable") not null default "available"
+      isAvailable bool not null default true
     );
   `
 
   const orderItemsTable = `
     create table if not exists orderItems (
       id int auto_increment primary key,
-      itemID int not null,
+      prodID int not null,
       orderID int not null,
-      foreign key itemID references items(id) on delete cascade,
-      foreign key orderID references orders(id) on delete restrict
+      foreign key (prodID) references products(id) on delete cascade,
+      foreign key (orderID) references orders(id) on delete restrict
     );
   `
 
-  connectDB.query(staffTable, (err) => {
-    if (err) {
-      console.error("Failed to create users table:", err);
-    } else {
-      console.log("Staff table ready.");
-    }
-  });
+  function tableExists(tableName, callback) {
+    const query = `show tables like ?`;
+    connectDB.query(query, [tableName], (err, results) => {
+      if (err) return callback(err, false);
+      callback(null, results.length > 0);
+    });
+  }
 
-  connectDB.query(ordersTable, (err) => {
-    if (err) {
-      console.error("Failed to create orders table:", err);
-    } else {
-      console.log("Orders table ready.");
-    }
-  });
+  const tables = [
+    { name: 'users', query: staffTable, readyMsg: 'Staff table ready.', failMsg: 'Failed to create users table:' },
+    { name: 'orders', query: ordersTable, readyMsg: 'Orders table ready.', failMsg: 'Failed to create orders table:' },
+    { name: 'products', query: productsTable, readyMsg: 'Products table ready.', failMsg: 'Failed to create items table:' },
+    { name: 'orderItems', query: orderItemsTable, readyMsg: 'OrderItems table ready.', failMsg: 'Failed to create order items table:' }
+  ];
 
-  connectDB.query(itemsTable, (err) => {
-    if (err) {
-      console.error("Failed to create orders table:", err);
-    } else {
-      console.log("Items table ready.");
-    }
+  tables.forEach(table => {
+    tableExists(table.name, (err, exists) => {
+      if (err) {
+        console.error(`Error checking table ${table.name}:`, err);
+        return;
+      }
+      if (exists) {
+        console.log(`${table.name} table already initialized.`);
+      } else {
+        connectDB.query(table.query, (err) => {
+          if (err) {
+            console.error(table.failMsg, err);
+          } else {
+            console.log(table.readyMsg);
+          }
+        });
+      }
+    });
   });
 
 }
 
-module.exports = connectDB, initializeTables;
+module.exports = { connectDB, initializeTables };

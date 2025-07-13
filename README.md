@@ -8,7 +8,11 @@
 
 - Implement MySQL
     - ~~DB connection~~
-    - *Initialize tables*
+    - ~~Initialize tables~~
+    - *Add product*
+    - Edit existing product
+    - Delete product
+    - View all prducts on dashboard w/ search
     - Dynamically list menu items (and category tabs) based on items table
 - Make order view page (or just make this a pop up window on `menu.html?`)
     - Fetch order items (orderItems table) when basket is clicked
