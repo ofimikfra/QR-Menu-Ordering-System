@@ -2,7 +2,7 @@
 
 body {
     font-family: "Noto Sans", sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     margin: 0;
     padding: 0;
     margin: auto;
@@ -19,8 +19,9 @@ header {
     margin: 0; 
     background-color: #352924;
     box-sizing: border-box;
-    position: relative;
     padding-top: 15px;
+    position: fixed;
+    width: 100%;
 }
 
 header h1 {
@@ -28,22 +29,38 @@ header h1 {
     padding: 10px 0; 
 }
 
+#menu {
+    position: fixed;
+    width: 100%;
+    top: 115px;
+}
+
+footer {
+    background-color: #352b24;
+    color: seashell;
+    text-align: center;
+    position: fixed;
+    padding: 2px 0;
+    width: 100%;
+    bottom: 0;
+}
+
 textarea, input, button, select {
     resize: none;
     font-family: "Noto Sans", sans-serif;
-    font-size: 18px;
+    font-size: 15px;
 }
 
 main {
     height: 100vh;
-    background-color: #ebd2c0;
+    background-color: #795e4b;
     margin: 0; 
     box-sizing: border-box;
     position: relative; 
     top: -1px; 
     padding: 12px;
     padding-top: 0px;
-    color: black;
+    color: white;
 }
 
 main h2 {
@@ -59,14 +76,15 @@ nav {
     box-sizing: border-box;
     text-align: left;
     color: white;
+    cursor: pointer;
 }
 
 .item {
     display: flex;
-    height: 150px;
-    width: fit-content;
+    height: 120px;
+    width: 100%;
     margin-bottom: 10px;
-    background-color: #f4f4f480;
+    background-color: #f4f4f4;
     border-radius: 15px;
     color: black;
 }
@@ -99,25 +117,13 @@ nav {
 }
 
 .itemimg {
-    height: 150px;
-    width: 150px;
-    height: 150px;
-    width: 150px;
+    height: 120px;
+    width: 120px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
-}
-
-footer {
-    background-color: #352b24;
-    color: seashell;
-    text-align: center;
-    position: relative;
-    padding: 10px 0;
-    width: 100%;
-    bottom: 0;
 }
 
 a {
@@ -131,12 +137,12 @@ a {
 }
 
 a:hover {
-    background-color: #83685577;
+    background-color: #795e4b7d;
     transition: background-color 0.3s ease;
 }
 
 a.active {
-    background-color: #cfb39e;
+    background-color: #795e4b;
 }
 
 .basket {
@@ -144,13 +150,20 @@ a.active {
     border-radius: 100%;
     border: none;
     padding: 15px;
-    position: fixed;
-    bottom: 0;
+    position: absolute;
+    bottom: 40px;
     right: 0;
     margin: 10px;
     z-index: 1000;
     width: 50px;
     height: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.basket:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
 }
 
 .basketcount {

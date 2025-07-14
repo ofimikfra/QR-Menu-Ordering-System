@@ -7,7 +7,6 @@
     <title>Menu</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="mobile.css">
-    <link rel="script" href="script.js">
 </head>
 
 <body>
@@ -24,38 +23,10 @@
 
     <header>
         <h1>Menu</h1>
-        <nav>
-            <a class="active" href="#allitems">All items</a>
-            <a href="#cat1">Category 1</a>
-            <a href="#cat2">Category 2</a>
-            <a href="#cat3">Category 3</a>
-        </nav>
+        <nav id="categories"></nav>
     </header>
 
-    <main>
-        <h2 id="allitems">All Items</h2>
-
-        <section class="item">
-            <div class="itemimg" style="background-image: url(https://i.pinimg.com/736x/27/78/0f/27780fc651dff0eb419b06ecf93a3055.jpg);"></div>
-            <div class="itemdesc">
-                <h3>Iced latte</h3>
-                <p>Brewed espresso is combined with cold milk and ice, creating a smooth, creamy coffee drink.</p>
-                <span>Options...</span>
-            </div>
-        </section>
-
-        <h2 id="cat1">Category 1</h2>
-
-        <section class="item">
-            <div class="itemimg">
-                <img src="https://i.pinimg.com/736x/ea/cd/be/eacdbe5bb407aba10613c49f6845eb56.jpg" alt="Item Name">
-            </div>
-            <div class="itemdesc">
-                <h3>Iced latte</h3>
-                <p>Description...</p>
-                <span>Options...</span>
-            </div>
-        </section>
+    <main id="menu">
 
     </main>
 
@@ -63,5 +34,7 @@
         <p>&copy; Sofia Francisco 2025</p>
     </footer>
 </body>
+
+<script src="script.js"></script>
 
 </html>

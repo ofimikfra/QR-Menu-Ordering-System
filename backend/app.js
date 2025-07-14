@@ -6,13 +6,6 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(path.join(__dirname, "../frontend")));
-
-// serve by default
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
-});
-
 /* ------------------------------- db queries ------------------------------- */
 
 connectDB.connect(err => {
@@ -22,13 +15,32 @@ connectDB.connect(err => {
 initializeTables();
 
 app.get("/api/products", (req, res) => {
-  connectDB.query("select name, imageURL from products", (err, results) => {
+  connectDB.query("select * from products", (err, results) => {
     if (err) {
       res.status(500).json({ error: "Database error" });
     } else {
       res.json(results);
     }
   });
+});
+
+app.get("/api/categories", (req, res) => {
+  connectDB.query("select distinct category from products where category is not null or category != '' order by category asc", (err, results) => {
+    if (err) {
+      res.status(500).json({ error: "Database error" });
+    } else {
+      res.json(results);
+    }
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+
+app.use(express.static(path.join(__dirname, "../frontend")));
+
+// serve by default
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/public/index.html"));
 });
 
 /* ------------------------------ public pages ------------------------------ */

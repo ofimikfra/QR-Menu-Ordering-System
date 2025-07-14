@@ -48,6 +48,7 @@ function initializeTables() {
       description varchar(255),
       imageURL varchar(255),
       price decimal(10,2) not null,
+      category varchar(255),
       isAvailable bool not null default true
     );
   `

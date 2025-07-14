@@ -1,28 +1,38 @@
 @media screen and (max-width: 600px) {
     body {
         width: 100%;
-        font-size: 15px;
+        font-size: 12px;
     }
 
     .item {
         display: flex;
-        height: 100px;
-        width: fit-content;
-    }
-
-    .itemdesc {
-        font-size: 12px;
+        height: 90px;
+        width: 100%;
     }
 
     .itemdesc h3 {
         margin-top: 0px;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow-x: hidden;
+        font-size: 12px;
     }
-    
-    .item img {
-        width: 100px;
-        height: 100px;
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
+
+    .itemdesc {
+        font-size: 10px;
     }
-    
+
+    .itemimg {
+        max-height: 90px;
+        min-width: 90px;
+        box-sizing: border-box;
+        background-size: cover;
+        box-sizing: border-box;
+    }
+
+    #menu {
+        top: 100px;
+    }
 }
