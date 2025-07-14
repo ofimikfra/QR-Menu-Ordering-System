@@ -15,7 +15,16 @@ connectDB.connect(err => {
 initializeTables();
 
 app.get("/api/products", (req, res) => {
-  connectDB.query("select * from products", (err, results) => {
+  const category = req.query.category;
+  let sql = "select * from products";
+  let params = []
+
+  if (category) {
+    sql += " where category = ?";
+    params.push(category)
+  }
+
+  connectDB.query(sql, params, (err, results) => {
     if (err) {
       res.status(500).json({ error: "Database error" });
     } else {
@@ -23,6 +32,8 @@ app.get("/api/products", (req, res) => {
     }
   });
 });
+
+
 
 app.get("/api/categories", (req, res) => {
   connectDB.query("select distinct category from products where category is not null or category != '' order by category asc", (err, results) => {

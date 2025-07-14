@@ -33,14 +33,35 @@ function displayMenu(products) {
 function displayCategories(categories) {
     console.log(categories);
     const nav = document.getElementById("categories");
-    let navhtml = `<a class="active">All items</a>`
+    let navhtml = `<a class="active" data-category="all">All items</a>`
 
     categories.forEach(c => {
-        navhtml += `<a>${c.category}</a>`
+        navhtml += `<a data-category="${c.category}">${c.category}</a>`
     });
     
     nav.innerHTML = navhtml;
+
+    Array.from(nav.querySelectorAll("a")).forEach(tab => {
+        tab.addEventListener("click", function () {
+            nav.querySelectorAll("a").forEach(a => a.classList.remove("active"));
+            tab.classList.add("active");
+
+            const category = tab.getAttribute("data-category");
+            displayProductsInCategory(category);
+        });
+    });
 }
+
+function displayProductsInCategory(category) {
+    let url = "/api/products";
+    if (category && category !== "all") {
+        url += `?category=${encodeURIComponent(category)}`;
+    }
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displayMenu(data));
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const productViewer = document.getElementById("productViewer");
