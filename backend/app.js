@@ -20,8 +20,10 @@ app.get("/api/products", (req, res) => {
   let params = []
 
   if (category) {
-    sql += " where category = ?";
+    sql += " where category = ? order by name asc";
     params.push(category)
+  } else {
+    sql += " order by category, name asc"
   }
 
   connectDB.query(sql, params, (err, results) => {

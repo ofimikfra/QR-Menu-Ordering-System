@@ -14,24 +14,35 @@ function viewProducts(products) {
 
 function displayMenu(products) {
     const menu = document.getElementById("menu");
-    let menuhtml = `<h2 id="allitems">All Items</h2>`;
-
-    products.forEach(product => {
-        menuhtml += `<section class="item">
-                    <div class="itemimg" style="background-image: url(${product.imageURL});"></div>
-                    <div class="itemdesc">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
-                        <span>Options...</span>
-                    </div>
-                </section>`;
+    let menuhtml = "";
+    const category = {};
+    
+    products.forEach(p => {
+        if (!category[p.category]) {
+            category[p.category] = [];
+        }
+        category[p.category].push(p);
     });
+
+    for (const c in category) {
+        menuhtml += `<h2>${c}</h2>`;
+
+        category[c].forEach(p => {
+            menuhtml += `<section class="item">
+                <div class="itemimg" style="background-image: url(${p.imageURL});"></div>
+                <div class="itemdesc">
+                    <h3>${p.name}</h3>
+                    <p>${p.description}</p>
+                    <span>Options...</span>
+                </div>
+            </section>`;
+        });
+    }
 
     menu.innerHTML = menuhtml;
 }
 
 function displayCategories(categories) {
-    console.log(categories);
     const nav = document.getElementById("categories");
     let navhtml = `<a class="active" data-category="all">All items</a>`
 
@@ -59,30 +70,32 @@ function displayProductsInCategory(category) {
     }
     fetch(url)
         .then(res => res.json())
-        .then(data => displayMenu(data));
+        .then(data => displayMenu(data))
+        .catch(err => console.error("Failed to fetch products.", err));
 }
 
 
 document.addEventListener("DOMContentLoaded", function () {
     const productViewer = document.getElementById("productViewer");
     const menu = document.getElementById("menu");
-    const nav = document.getElementById("categories");
 
     if (productViewer) {
         fetch('/api/products')
             .then(res => res.json())
-            .then(data => viewProducts(data));
+            .then(data => viewProducts(data))
+            .catch(err => console.error("Failed to fetch products", err));
     }
 
     if (menu) {
         fetch('/api/products')
             .then(res => res.json())
-            .then(data => displayMenu(data));
-    }
+            .then(data => displayMenu(data))
+            .catch(err => console.error("Failed to fetch products", err));
 
-    if (nav) {
         fetch('/api/categories')
             .then(res => res.json())
-            .then(data => displayCategories(data));
+            .then(data => displayCategories(data))
+            .catch(err => console.error("Failed to fetch categories", err));
     }
+
 });
