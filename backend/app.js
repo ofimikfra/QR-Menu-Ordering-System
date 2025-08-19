@@ -1,10 +1,15 @@
 const express = require("express");
 const path = require("path"); 
+const fs = require("fs");
+const crypto = require('crypto');
 const { connectDB, initializeTables } = require("./modules");
 require("dotenv").config(); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use("/media", express.static(path.join(__dirname, "../frontend/media")));
+app.use(express.json());
 
 /* ------------------------------- db queries ------------------------------- */
 
@@ -14,17 +19,30 @@ connectDB.connect(err => {
 
 initializeTables();
 
+// fetch products
 app.get("/api/products", (req, res) => {
   const category = req.query.category;
+  const term = req.query.term;
+  
   let sql = "select * from products";
-  let params = []
+  const params = [];
+  const conditions = [];
 
   if (category) {
-    sql += " where category = ? order by name asc";
-    params.push(category)
-  } else {
-    sql += " order by category, name asc"
+    conditions.push("category = ?");
+    params.push(category);
   }
+
+  if (term) {
+    conditions.push("name like ?");
+    params.push(`%${term}%`);
+  }
+
+  if (conditions.length > 0) {
+    sql += " where " + conditions.join(" and ");
+  }
+
+  sql += " order by category, name asc";
 
   connectDB.query(sql, params, (err, results) => {
     if (err) {
@@ -35,10 +53,9 @@ app.get("/api/products", (req, res) => {
   });
 });
 
-
-
+// fetch categories
 app.get("/api/categories", (req, res) => {
-  connectDB.query("select distinct category from products where category is not null or category != '' order by category asc", (err, results) => {
+  connectDB.query("select distinct category from products where category is not null and category != '' order by category asc", (err, results) => {
     if (err) {
       res.status(500).json({ error: "Database error" });
     } else {
@@ -46,6 +63,11 @@ app.get("/api/categories", (req, res) => {
     }
   });
 });
+
+// add products (w/o image, figure that out later)
+
+
+
 
 /* -------------------------------------------------------------------------- */
 

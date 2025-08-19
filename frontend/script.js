@@ -1,13 +1,22 @@
+let currency = "$"; // change in config
+
 function viewProducts(products) {
     const productViewer = document.getElementById("productViewer");
     let html = "";
 
-    products.forEach(product => {
+    if (products.length == 0) {
+       html += `<h3>No matching products found.</h3>`; 
+       productViewer.style.display = "flex";
+       productViewer.style.justifyContent = "center";
+    } else {
+        products.forEach(product => {
         html += `<div class="itemMinimized">
                     <div class="itemimg" style="background-image: url(${product.imageURL});"></div>
                     <h4>${product.name}</h4>
                 </div>`;
+        productViewer.style.justifyContent = "left";
     });
+    }
 
     productViewer.innerHTML = html;
 }
@@ -74,16 +83,56 @@ function displayProductsInCategory(category) {
         .catch(err => console.error("Failed to fetch products.", err));
 }
 
+function searchProduct(term) {
+    let url = "/api/products";
+    if (term && term !== "" && term !== null) {
+        url += `?term=${encodeURIComponent(term)}`;
+    }
+    fetch(url)
+        .then(res => res.json())
+        .then(data => viewProducts(data))
+        .catch(err => console.error("Failed to search for products.", err));
+}
+
+function populateCategoryOptions(categories) {
+    const categorySelect = document.getElementById("categorySelect");
+    console.log(categories);
+    categories.forEach(cat => {
+        const option = document.createElement("option");
+        option.value = cat.category;
+        option.textContent = cat.category;
+        categorySelect.appendChild(option);
+    });
+}
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const productViewer = document.getElementById("productViewer");
     const menu = document.getElementById("menu");
-
+    const categorySelect = document.getElementById("categorySelect");
+    
     if (productViewer) {
         fetch('/api/products')
             .then(res => res.json())
             .then(data => viewProducts(data))
             .catch(err => console.error("Failed to fetch products", err));
+
+        const productSearch = document.getElementById("productSearch");
+        const search = document.getElementById("search");
+        
+        // live search
+        search.addEventListener("input", () => {
+            const term = search.value.trim();
+            searchProduct(term);
+        });
+
+        // clear search on reset
+        productSearch.addEventListener("reset", () => {
+            search.value = "";
+            searchProduct(""); 
+        });
+    
+        searchProduct(""); 
     }
 
     if (menu) {
@@ -98,4 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .catch(err => console.error("Failed to fetch categories", err));
     }
 
+    if (categorySelect) {
+        fetch('/api/categories')
+            .then(res => res.json())
+            .then(data => populateCategoryOptions(data))
+            .catch(err => console.error("Failed to load categories:", err));
+    }
 });

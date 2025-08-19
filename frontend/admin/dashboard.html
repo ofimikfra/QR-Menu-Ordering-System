@@ -20,21 +20,26 @@
 
         <section class="manager">
 
-            <h2>Product Manager</h2>
-            <form name="addProduct">
-                <input type="text" name="ProductName" placeholder="Product name..." maxlength="255" required> <br>
-                <textarea name="desc" placeholder="Product description..." maxlength="255" required></textarea> <br>
-                <span>$</span><input type="number" name="price" placeholder="Product price..." min="0" step="0.01"> <br>
-                <input type="file" name="ProductImage" accept=".jpg,.png,.jpeg"> <br> <!--make file restriction function server side-->
+            <h2>Add a Product</h2>
+            <form name="addProducts" id="addProducts">
+                <input type="text" name="name" placeholder="Name" maxlength="255" required> <br>
+                <textarea name="desc" placeholder="Description" maxlength="255" required></textarea> <br>
+                <span>$</span><input type="number" name="price" placeholder="Price" min="0" step="0.01"> <br>
+
+                <select name="category" id="categorySelect" required>
+                    <option disabled selected>Select a category</option>
+                </select> </br>
+
+                <input type="file" name="img" accept=".jpg,.png,.jpeg"> <br> <!--make file restriction function server side-->
                 <button type="submit">Add Item</button>
             </form>
 
             <h2>Configuration</h2>
             <form name="config">
                 <label for="currency">Currency:</label>
-                <select name="currency"> <!--fetch all currencies online-->
-                    <option>AED (Dhs)</option>
-                    <option>USD ($)</option>
+                <select name="currency" id="currency"> <!--fetch all currencies online-->
+                    <option id="aed" value="Dhs">AED (Dhs)</option>
+                    <option id="usd" value="$">USD ($)</option>
                 </select>
                 <button type="submit">Apply changes</button> <!--disabled default, when config is changed enable button-->
             </form>
@@ -43,20 +48,12 @@
         <section class="manager">
 
             <h2>Product Viewer</h2> 
-            <form name="productSearch">
-                <input type="text" placeholder="Search for a product...">
-                <button type="submit">Search</button>
+            <form name="productSearch" id="productSearch">
+                <input type="text" id="search" placeholder="Search for a product...">
                 <button type="reset">X</button>
             </form>
 
-            <div class="productViewer" id="productViewer">
-                <!--
-                <div class="itemMinimized">
-                    <div class="itemimg" style="background-image: url(https://i.pinimg.com/736x/27/78/0f/27780fc651dff0eb419b06ecf93a3055.jpg);"></div>
-                    <h3>Iced latte</h3>
-                </div>
-                -->
-            </div>
+            <div class="productViewer" id="productViewer"></div>
 
         </section>
         

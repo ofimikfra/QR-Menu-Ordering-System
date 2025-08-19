@@ -12,7 +12,7 @@
     - *Add product*
     - Edit existing product
     - Delete product
-    - *View all products on dashboard w/ search*
+    - ~~View all products on dashboard w/ search~~
     - ~~View products in specific category via tabs~~
     - ~~Dynamically list menu items (and category tabs) based on products table~~
 - Make order view page (or just make this a pop up window on `menu.html`?)

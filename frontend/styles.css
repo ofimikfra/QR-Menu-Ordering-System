@@ -51,6 +51,12 @@ textarea, input, button, select {
     font-size: 15px;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 main {
     height: 100vh;
     background-color: #795e4b;
