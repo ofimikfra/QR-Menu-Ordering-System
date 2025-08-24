@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const productViewer = document.getElementById("productViewer");
     const menu = document.getElementById("menu");
     const categorySelect = document.getElementById("categorySelect");
+    const addProducts = document.getElementById("addProducts");
     
     if (productViewer) {
         fetch('/api/products')
@@ -152,5 +153,39 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(res => res.json())
             .then(data => populateCategoryOptions(data))
             .catch(err => console.error("Failed to load categories:", err));
+    }
+
+    // add products 
+    if (addProducts) {
+        addProducts.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(addProducts);
+            
+            const product = { // convert to json to pass to backend
+                name: formData.get("name"),
+                desc: formData.get("desc"),
+                price: parseFloat(formData.get("price")),
+                category: formData.get("category")
+            };
+
+            fetch("/api/products", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(product)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Failed to add product");
+                return res.json();
+            })
+            .then(data => {
+                alert(data.message); // make small preview confirm pop up before adding product
+                searchProduct(""); 
+                addProducts.reset();
+            })
+            .catch(err => console.error("Error adding product:", err));
+        });
     }
 });

@@ -24,7 +24,7 @@ app.get("/api/products", (req, res) => {
   const category = req.query.category;
   const term = req.query.term;
   
-  let sql = "select * from products";
+  let sql = "select * from products"; // either disable clicking of unavailable items (css + js) or don't display at all
   const params = [];
   const conditions = [];
 
@@ -64,7 +64,33 @@ app.get("/api/categories", (req, res) => {
   });
 });
 
-// add products (w/o image, figure that out later)
+// add product
+app.post("/api/products", (req, res) => {
+  const { name, desc, price, category } = req.body;
+  var img = ""; // fetch img, if none then img_missing
+
+  if (!name || !desc || !price || !category) {
+    return res.status(400).json({ error: "Please fill in all fields." });
+  }
+
+  if (!img) {
+    img = "../media/img_missing.png"
+  }
+
+  // implement image upload into ../media/
+
+  const sql = "insert into products (name, description, price, category, imageURL) values (?, ?, ?, ?, ?)";
+  const params = [name, desc, price, category, img];
+
+  connectDB.query(sql, params, (err, result) => {
+    if (err) {
+      console.error("Error inserting product:", err);
+      return res.status(500).json({ error: "Database error" });
+    }
+
+    res.status(201).json({ message: "Product added successfully", productId: result.insertId });
+  });
+});
 
 
 
